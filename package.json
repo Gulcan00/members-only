@@ -2,6 +2,7 @@
   "name": "members-only",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "start": "tsx watch src/app.ts",
     "build": "tsc",
@@ -17,10 +18,15 @@
   "dependencies": {
     "@tailwindcss/postcss": "^4.0.14",
     "autoprefixer": "^10.4.21",
+    "bcryptjs": "^3.0.2",
+    "connect-pg-simple": "^10.0.0",
     "dotenv": "^16.4.7",
     "ejs": "^3.1.10",
     "express": "^4.21.2",
+    "express-session": "^1.18.1",
     "express-validator": "^7.2.1",
+    "passport": "^0.7.0",
+    "passport-local": "^1.0.0",
     "pg": "^8.14.0",
     "postcss": "^8.5.3",
     "postcss-cli": "^11.0.1",
@@ -28,6 +34,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.22.0",
+    "@types/ejs": "^3.1.5",
     "@types/express": "^5.0.0",
     "@types/node": "^22.13.10",
     "eslint": "^9.22.0",
