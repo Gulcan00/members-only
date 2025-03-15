@@ -1,6 +1,5 @@
 import 'dotenv/config';
 import express from 'express';
-import ejs from 'ejs';
 import path from 'path';
 
 const __dirname = path.resolve();
