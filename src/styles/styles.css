@@ -1,1 +1,13 @@
 @import 'tailwindcss';
+@import './form.css';
+
+body {
+  @apply p-0 m-0 bg-zinc-900 text-zinc-300 font-sans;
+}
+
+.btn {
+  @apply rounded-full px-3 py-1.5 text-sm/6 font-semibold shadow-xs focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600 cursor-pointer;
+}
+.btn.btn-primary {
+  @apply bg-teal-600 text-white hover:bg-teal-500;
+}

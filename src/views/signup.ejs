@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="/styles/styles.css" />
+  </head>
+  <body>
+    <div class="flex justify-center">
+      <form
+        action="/sign-up"
+        method="post"
+        class="grid grid-cols-1 gap-8 bg-zinc-800 p-8 w-full sm:max-w-sm"
+      >
+        <div class="relative">
+          <input
+            type="text"
+            name="firstName"
+            id="firstName"
+            required
+            class="<%= `form-field peer ${(locals.errors && errors.firstName) ? 'invalid' : ''}`%>"
+            placeholder=" "
+          />
+          <label for="firstName" class="form-label"> First Name </label>
+          <% if (locals.errors && errors.firstName) { %>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            class="size-6 text-red-400 absolute top-4 inset-x-[90%]"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12ZM12 8.25a.75.75 0 0 1 .75.75v3.75a.75.75 0 0 1-1.5 0V9a.75.75 0 0 1 .75-.75Zm0 8.25a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z"
+              clip-rule="evenodd"
+            />
+          </svg>
+          <p class="text-xs text-red-400 mt-2"><%= errors.firstName.msg %></p>
+          <% } %>
+        </div>
+        <div class="relative">
+          <input
+            type="text"
+            name="lastName"
+            id="lastName"
+            required
+            class="<%= `form-field peer ${(locals.errors && errors.lastName) ? 'invalid' : ''}`%>"
+            placeholder=" "
+          />
+          <label for="lastName" class="form-label"> Last Name </label>
+          <% if (locals.errors && errors.lastName) { %>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            class="size-6 text-red-400 absolute top-4 inset-x-[90%]"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12ZM12 8.25a.75.75 0 0 1 .75.75v3.75a.75.75 0 0 1-1.5 0V9a.75.75 0 0 1 .75-.75Zm0 8.25a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z"
+              clip-rule="evenodd"
+            />
+          </svg>
+          <p class="text-xs text-red-400 mt-2"><%= errors.lastName.msg %></p>
+          <% } %>
+        </div>
+        <div class="relative">
+          <input
+            type="email"
+            name="email"
+            id="email"
+            required
+            class="<%= `form-field peer ${(locals.errors && errors.email) ? 'invalid' : ''}`%>"
+            placeholder=" "
+          />
+          <label for="email" class="form-label"> Email </label>
+          <% if (locals.errors && errors.email) { %>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            class="size-6 text-red-400 absolute top-4 inset-x-[90%]"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12ZM12 8.25a.75.75 0 0 1 .75.75v3.75a.75.75 0 0 1-1.5 0V9a.75.75 0 0 1 .75-.75Zm0 8.25a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z"
+              clip-rule="evenodd"
+            />
+          </svg>
+          <p class="text-xs text-red-400 mt-2"><%= errors.email.msg %></p>
+          <% } %>
+        </div>
+        <div class="relative">
+          <input
+            type="password"
+            name="password"
+            id="password"
+            autocomplete="new-password"
+            required
+            class="<%= `form-field peer ${(locals.errors && errors.password) ? 'invalid' : ''}`%>"
+            placeholder=" "
+          />
+          <label for="password" class="form-label">Password</label>
+          <% if (locals.errors && errors.password) { %>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            class="size-6 text-red-400 absolute top-4 inset-x-[90%]"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12ZM12 8.25a.75.75 0 0 1 .75.75v3.75a.75.75 0 0 1-1.5 0V9a.75.75 0 0 1 .75-.75Zm0 8.25a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z"
+              clip-rule="evenodd"
+            />
+          </svg>
+          <p class="text-xs text-red-400 mt-2"><%= errors.password.msg %></p>
+          <% } %>
+        </div>
+        <div class="relative">
+          <input
+            type="password"
+            name="passwordConfirmation"
+            id="confirm-password"
+            autocomplete="new-password"
+            required
+            class="<%= `form-field peer ${(locals.errors && errors.passwordConfirmation) ? 'invalid' : ''}`%>"
+            placeholder=" "
+          />
+          <label for="confirm-password" class="form-label"
+            >Confirm Password</label
+          >
+          <% if (locals.errors && errors.passwordConfirmation) { %>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            class="size-6 text-red-400 absolute top-4 inset-x-[90%]"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12ZM12 8.25a.75.75 0 0 1 .75.75v3.75a.75.75 0 0 1-1.5 0V9a.75.75 0 0 1 .75-.75Zm0 8.25a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z"
+              clip-rule="evenodd"
+            />
+          </svg>
+          <p class="text-xs text-red-400 mt-2">
+            <%= errors.passwordConfirmation.msg %>
+          </p>
+          <% } %>
+        </div>
+        <button type="submit" class="btn btn-primary">Sign Up</button>
+      </form>
+    </div>
+  </body>
+</html>
