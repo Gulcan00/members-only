@@ -1,5 +1,5 @@
 .form-field {
-  @apply block px-3 pb-2 pt-5 text-base w-full border-1 border-zinc-500 rounded-lg focus:border-2 focus:border-teal-400 focus:outline-none focus:ring-0 appearance-none;
+  @apply block px-3 pb-2 pt-5 text-base w-full border-1 border-zinc-500 rounded-2xl focus:border-2 focus:border-teal-400 focus:outline-none focus:ring-0 appearance-none;
 }
 .form-field.invalid {
   @apply border-red-500;

@@ -1,8 +1,11 @@
 @import 'tailwindcss';
 @import './form.css';
 
+html {
+  @apply h-full;
+}
 body {
-  @apply p-0 m-0 bg-zinc-900 text-zinc-300 font-sans;
+  @apply p-0 m-0 bg-zinc-900 text-zinc-300 font-sans w-full h-full;
 }
 
 .btn {
