@@ -6,14 +6,14 @@ import passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
 import { User } from '../db/models';
 
-const customFields = {
+passport.use(new LocalStrategy({
   usernameField: 'email',
-  passwordField: 'password'
-};
-
-passport.use(new LocalStrategy(customFields, (email, password, done) => {
+  passwordField: 'password',
+  passReqToCallback: true
+  }, (req, email, password, done) => {
   getUserByEmail({email})
   .then(user => {
+    req.session.messages = [];
     if (!user) {
       return done(null, false, {message: 'Incorrect email or password'});
     }
