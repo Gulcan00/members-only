@@ -47,7 +47,7 @@
             placeholder=" "
           />
           <label for="email" class="form-label"> Email </label>
-          <% if (locals.errors && errors.email) { %>
+          <% if (locals.errors) { %>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -60,6 +60,7 @@
               clip-rule="evenodd"
             />
           </svg>
+          <% } if (locals.errors && errors.email) { %>
           <p class="text-xs text-red-400 mt-2"><%= errors.email.msg %></p>
           <% } %>
         </div>

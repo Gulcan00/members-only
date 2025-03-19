@@ -85,7 +85,7 @@ export const signupPost = [
       } else {
         const hashedPassword = await bcrypt.hash(password, 10);
         createUser({ firstName, lastName, email, password: hashedPassword })
-          .then(() => res.redirect('/login'))
+          .then(() => res.redirect('/log-in'))
           .catch(next);
       }
     }
@@ -116,7 +116,16 @@ export const loginPost = [
   },
   passport.authenticate('local', {
     successRedirect: '/',
-    failureRedirect: '/login',
+    failureRedirect: '/log-in',
     failureMessage: 'Incorrect email or password'
   })
 ];
+
+export function logoutGet(req: Request, res: Response, next: NextFunction) {
+  req.logout((err) => {
+    if (err) {
+      return next(err);
+    }
+    res.redirect('/log-in');
+  });
+}
