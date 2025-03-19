@@ -6,6 +6,7 @@ import session from 'express-session';
 import pgSession from 'connect-pg-simple';
 import pool from './db/pool';
 import authRouter from './routes/authRouter';
+import { isAuth, setCurrentUser } from './middleware';
 
 const pgSessionStore = pgSession(session);
 const __dirname = path.resolve();
@@ -31,6 +32,9 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'src/views'));
 
 app.use('/', authRouter);
+
+app.use(isAuth);
+app.use(setCurrentUser);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
