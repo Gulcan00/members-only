@@ -1,12 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Members Only</title>
-    <link rel="stylesheet" href="/styles/styles.css">
-</head>
-<body>
-    
-</body>
+    <link rel="stylesheet" href="/styles/styles.css" />
+  </head>
+  <body>
+    <div class="w-8/10 mx-auto">
+      <a href="/create-message" class="flex items-center gap-2 btn btn-secondary"
+        ><svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="1.5"
+          stroke="currentColor"
+          class="size-6"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M12 4.5v15m7.5-7.5h-15"
+          />
+        </svg>
+        Create</a
+      >
+      <div class="grid grid-cols-1 gap-8">
+      <% messages.forEach(message => { %>
+        <div class="border-b-1 border-b-zinc-400">
+            <p>coming soon</p>
+        </div>
+      <% }); %>
+    </div>
+    </div>
+  </body>
 </html>

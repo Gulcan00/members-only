@@ -14,6 +14,9 @@ body {
 .btn.btn-primary {
   @apply bg-teal-600 text-white hover:bg-teal-500;
 }
+.btn.btn-secondary {
+  @apply border-1 border-zinc-500 hover:text-teal-500 hover:border-2 hover:border-teal-500;
+}
 
 .bg-image {
   background-image: 

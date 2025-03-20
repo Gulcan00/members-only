@@ -1,9 +1,10 @@
-import { Router, Request, Response } from 'express';
+import { Router } from 'express';
+import { createMessageGet, createMessagePost, getMessages } from '../controllers/messageController';
 
 const messageRouter = Router();
 
-messageRouter.get('/', (req: Request, res: Response) => {
-    res.render('index');
-});
+messageRouter.get('/', getMessages);
+messageRouter.get('/create-message', createMessageGet);
+messageRouter.post('/create-message', createMessagePost);
 
 export default messageRouter;
