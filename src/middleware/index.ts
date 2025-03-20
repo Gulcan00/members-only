@@ -6,7 +6,7 @@ export function isAuth(req: Request, res: Response, next: NextFunction) {
     if (req.isAuthenticated()) {
         next();
     } else {
-        res.status(401).json({mgs: 'You are not authenticated'}); // TODO replace with render error page
+        res.redirect('/log-in');
     }
 }
 

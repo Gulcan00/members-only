@@ -7,6 +7,7 @@ import pgSession from 'connect-pg-simple';
 import pool from './db/pool';
 import authRouter from './routes/authRouter';
 import { isAuth, setCurrentUser } from './middleware';
+import messageRouter from './routes/messageRouter';
 
 const pgSessionStore = pgSession(session);
 const __dirname = path.resolve();
@@ -35,6 +36,8 @@ app.use('/', authRouter);
 
 app.use(isAuth);
 app.use(setCurrentUser);
+
+app.use('/', messageRouter);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
