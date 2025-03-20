@@ -25,10 +25,17 @@
         </svg>
         Create</a
       >
-      <div class="grid grid-cols-1 gap-8">
+      <a href="/log-out">Log out</a>
+      <div class="grid grid-cols-1 gap-8 max-w-lg mx-auto">
       <% messages.forEach(message => { %>
-        <div class="border-b-1 border-b-zinc-400">
-            <p>coming soon</p>
+        <div class="px-4 py-8 border-b-1 border-b-zinc-400">
+            <!-- TODO getAllUsers and pass to index, display initials as avatar -->
+            <h3 class="text-zinc-50 font-semibold"><%= message.title %></h3>
+            <div class="flex">
+                <img src="/images/avatar.svg" alt="face icon" aria-hidden="true">
+                <span><%= message.created_at %></span> <!-- TODO format this using a library-->
+            </div>
+            <p class="text-zinc-500"><%= message.body_text %></p>
         </div>
       <% }); %>
     </div>
