@@ -38,6 +38,9 @@ app.use(isAuth);
 app.use(setCurrentUser);
 
 app.use('/', messageRouter);
+app.use('*', (req, res) => {
+  res.render('error', {message: 'Page not found'});
+});
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
@@ -46,7 +49,5 @@ app.listen(port, () => {
 
 // Error Handling
 app.use(((err, req, res, next) => {
-  res.locals.message = err.message;
-  res.status(err.status || 500);
-  //res.render('error');
+  res.status(err.status || 500).render('error', {message: err.message});
 }) as ErrorRequestHandler);

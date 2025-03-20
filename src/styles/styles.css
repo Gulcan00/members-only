@@ -14,3 +14,15 @@ body {
 .btn.btn-primary {
   @apply bg-teal-600 text-white hover:bg-teal-500;
 }
+
+.bg-image {
+  background-image: 
+  linear-gradient(
+    rgba(24, 24, 27, 0.5),
+    rgba(24, 24, 27, 0.5)
+  ),
+  url('/images/error.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
