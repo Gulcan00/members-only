@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from "express";
+import moment from 'moment';
 import { User } from "../db/models";
 
 
@@ -20,5 +21,10 @@ export function isAdmin(req: Request, res: Response, next: NextFunction) {
 
 export function setCurrentUser(req: Request, res: Response, next: NextFunction) {
     res.locals.currentUser = req.user;
+    next();
+}
+
+export function momentLib(req: Request, res: Response, next: NextFunction) {
+    res.locals.moment = moment;
     next();
 }

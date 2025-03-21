@@ -6,7 +6,7 @@ import session from 'express-session';
 import pgSession from 'connect-pg-simple';
 import pool from './db/pool';
 import authRouter from './routes/authRouter';
-import { isAuth, setCurrentUser } from './middleware';
+import { isAuth, setCurrentUser, momentLib} from './middleware';
 import messageRouter from './routes/messageRouter';
 
 const pgSessionStore = pgSession(session);
@@ -36,8 +36,12 @@ app.use('/', authRouter);
 
 app.use(isAuth);
 app.use(setCurrentUser);
+app.use(momentLib);
 
-app.use('/', messageRouter);
+app.get('/', (req, res) => {
+  res.redirect('/messages');
+})
+app.use('/messages', messageRouter);
 app.use('*', (req, res) => {
   res.render('error', {message: 'Page not found'});
 });

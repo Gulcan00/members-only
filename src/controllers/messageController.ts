@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { body, validationResult } from 'express-validator';
-import { createMessage, getAllMessages } from "../db/queries";
+import { createMessage, getAllMessages, deleteMessage as deleteMessageQry } from "../db/queries";
 import { User } from "../db/models";
 
 export async function getMessages(req: Request, res: Response) {
@@ -29,3 +29,10 @@ export const createMessagePost = [
         .catch(next);
     }
 ];
+
+export function deleteMessage(req: Request, res: Response, next: NextFunction) {
+    const id = Number.parseInt(req.params.id);
+    deleteMessageQry(id)
+    .then(() => res.redirect('/'))
+    .catch(err => next(err));
+}

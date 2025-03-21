@@ -50,6 +50,16 @@ export async function createMessage({
 }
 
 export async function getAllMessages() {
-  const { rows } = await pool.query("SELECT * FROM messages");
+  const { rows } = await pool.query(
+    `SELECT m.id, m.title, m.body_text, m.created_at, 
+     u.first_name, u.last_name, u.email
+     FROM messages m 
+     JOIN users u
+     ON m.author_id = u.id`
+  );
   return rows;
+}
+
+export async function deleteMessage(id: number) {
+  await pool.query('DELETE FROM messages WHERE id = $1', [id]);
 }
