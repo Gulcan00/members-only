@@ -9,11 +9,9 @@ import { User } from '../db/models';
 passport.use(new LocalStrategy({
   usernameField: 'email',
   passwordField: 'password',
-  passReqToCallback: true
-  }, (req, email, password, done) => {
+  }, (email, password, done) => {
   getUserByEmail({email})
   .then(user => {
-    req.session.messages = [];
     if (!user) {
       return done(null, false, {message: 'Incorrect email or password'});
     }
@@ -42,7 +40,7 @@ passport.deserializeUser((id: number, done) => {
   .catch(err => done(err));
 })
 
-export function signupGet(req: Request, res: Response) {
+export function signupGet(_req: Request, res: Response) {
   res.render('signup');
 }
 
@@ -93,17 +91,19 @@ export const signupPost = [
 ];
 
 export function loginGet(req: Request, res: Response) {
-  if (req.session.messages) {
-    res.render('login', {
-      errors: {password: {msg: req.session.messages[0]}}
+  if (req.session.messages?.length > 0) {
+    const msg = req.session.messages[0];
+    req.session.messages = [];
+    return res.render('login', {
+      errors: {password: {msg}}
     });
   }
-  res.render('login');
+  return res.render('login');
 }
 
 export const loginPost = [
   body('email').trim().isEmail().withMessage('Enter a valid email address'),
-  async (req: Request, res: Response, next: NextFunction) => {
+  (req: Request, res: Response, next: NextFunction) => {
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
