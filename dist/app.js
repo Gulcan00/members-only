@@ -6,6 +6,8 @@ import session from 'express-session';
 import pgSession from 'connect-pg-simple';
 import pool from './db/pool';
 import authRouter from './routes/authRouter';
+import { isAuth, setCurrentUser, momentLib } from './middleware';
+import messageRouter from './routes/messageRouter';
 const pgSessionStore = pgSession(session);
 const __dirname = path.resolve();
 const app = express();
@@ -25,13 +27,21 @@ app.use(passport.session());
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'src/views'));
 app.use('/', authRouter);
+app.use(isAuth);
+app.use(setCurrentUser);
+app.use(momentLib);
+app.get('/', (req, res) => {
+    res.redirect('/messages');
+});
+app.use('/messages', messageRouter);
+app.use('*', (req, res) => {
+    res.render('error', { message: 'Page not found' });
+});
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
     return console.log(`Express is listening at http://localhost:${port}`);
 });
 // Error Handling
 app.use(((err, req, res, next) => {
-    res.locals.message = err.message;
-    res.status(err.status || 500);
-    //res.render('error');
+    res.status(err.status || 500).render('error', { message: err.message });
 }));

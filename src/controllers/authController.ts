@@ -1,44 +1,54 @@
 import { Request, Response, NextFunction } from 'express';
 import bcrypt from 'bcryptjs';
 import { body, validationResult } from 'express-validator';
-import { createUser, getUserByEmail, getUserById } from '../db/queries';
 import passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
+import UserDatabase from '../db/entities/UserDatabase';
 import { User } from '../db/models';
 
-passport.use(new LocalStrategy({
-  usernameField: 'email',
-  passwordField: 'password',
-  }, (email, password, done) => {
-  getUserByEmail({email})
-  .then(user => {
-    if (!user) {
-      return done(null, false, {message: 'Incorrect email or password'});
-    }
+passport.use(
+  new LocalStrategy(
+    {
+      usernameField: 'email',
+      passwordField: 'password',
+    },
+    (email, password, done) => {
+      UserDatabase.getUserByEmail({ email })
+        .then((user) => {
+          if (!user) {
+            return done(null, false, {
+              message: 'Incorrect email or password',
+            });
+          }
 
-    bcrypt.compare(password, user.password)
-      .then(match => {
-         if (!match) {
-          return done(null, false, {message: 'Incorrect email or password'});
-         }
-         return done(null, user);
-      })
-      .catch((err) => done(err));
-  })
-  .catch((err) => done(err))
-}));
+          bcrypt
+            .compare(password, user.password)
+            .then((match) => {
+              if (!match) {
+                return done(null, false, {
+                  message: 'Incorrect email or password',
+                });
+              }
+              return done(null, user);
+            })
+            .catch((err) => done(err));
+        })
+        .catch((err) => done(err));
+    }
+  )
+);
 
 passport.serializeUser((user, done) => {
   done(null, (user as User).id);
 });
 
 passport.deserializeUser((id: number, done) => {
-  getUserById({id})
-  .then(user => {
-    done(null, user);
-  })
-  .catch(err => done(err));
-})
+  UserDatabase.getById(id)
+    .then((user) => {
+      done(null, user);
+    })
+    .catch((err) => done(err));
+});
 
 export function signupGet(_req: Request, res: Response) {
   res.render('signup');
@@ -75,14 +85,19 @@ export const signupPost = [
       });
     } else {
       const { firstName, lastName, email, password } = req.body;
-      const user = await getUserByEmail({email});
-      if (user)  {
+      const user = await UserDatabase.getUserByEmail({ email });
+      if (user) {
         res.render('signup', {
-          errors: {email: {msg: `User with email ${email} already exists`}}
-        })
+          errors: { email: { msg: `User with email ${email} already exists` } },
+        });
       } else {
         const hashedPassword = await bcrypt.hash(password, 10);
-        createUser({ firstName, lastName, email, password: hashedPassword })
+        UserDatabase.createUser({
+          firstName,
+          lastName,
+          email,
+          password: hashedPassword,
+        })
           .then(() => res.redirect('/log-in'))
           .catch(next);
       }
@@ -95,7 +110,7 @@ export function loginGet(req: Request, res: Response) {
     const msg = req.session.messages[0];
     req.session.messages = [];
     return res.render('login', {
-      errors: {password: {msg}}
+      errors: { password: { msg } },
     });
   }
   return res.render('login');
@@ -117,8 +132,8 @@ export const loginPost = [
   passport.authenticate('local', {
     successRedirect: '/',
     failureRedirect: '/log-in',
-    failureMessage: 'Incorrect email or password'
-  })
+    failureMessage: 'Incorrect email or password',
+  }),
 ];
 
 export function logoutGet(req: Request, res: Response, next: NextFunction) {

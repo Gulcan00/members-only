@@ -14,4 +14,5 @@ export interface Message {
   created_at: Date;
   body_text: string;
   author_id: number;
+  author: User;
 }
