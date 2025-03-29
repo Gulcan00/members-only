@@ -1,74 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Create Message</title>
-    <link rel="stylesheet" href="/styles/styles.css">
-</head>
-<body>
+    <link rel="stylesheet" href="/styles/styles.css" />
+  </head>
+  <body>
     <!-- TODO: Add svg to background :) -->
     <form
-        action="/create-message"
-        method="post"
-        class="grid grid-cols-1 gap-8 p-8 w-full sm:max-w-md sm:px-12 absolute top-1/2 left-1/2 transform -translate-1/2"
-      >
-        <h1 class="text-xl font-bold">Create message</h1>
-        <div class="relative">
-          <input
-            type="text"
-            name="title"
-            id="title"
-            required
-            class="<%= `form-field peer ${(locals.errors && errors.title) ? 'invalid' : ''}`%>"
-            placeholder=" "
+      action="/messages/create"
+      method="post"
+      class="grid grid-cols-1 gap-8 p-8 w-full sm:max-w-md sm:px-12 absolute top-1/2 left-1/2 transform -translate-1/2"
+    >
+      <h1 class="text-xl font-bold">Create message</h1>
+      <div class="relative">
+        <input
+          type="text"
+          name="title"
+          id="title"
+          required
+          class="<%= `form-field peer ${(locals.errors && errors.title) ? 'invalid' : ''}`%>"
+          placeholder=" "
+        />
+        <label for="title" class="form-label">
+          Title<span aria-label="required">*</span>
+        </label>
+        <% if (locals.errors && errors.title) { %>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          class="size-6 text-red-400 absolute top-4 inset-x-[90%]"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12ZM12 8.25a.75.75 0 0 1 .75.75v3.75a.75.75 0 0 1-1.5 0V9a.75.75 0 0 1 .75-.75Zm0 8.25a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z"
+            clip-rule="evenodd"
           />
-          <label for="title" class="form-label"> Title<span aria-label="required">*</span> </label>
-          <% if (locals.errors && errors.title) { %>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            class="size-6 text-red-400 absolute top-4 inset-x-[90%]"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12ZM12 8.25a.75.75 0 0 1 .75.75v3.75a.75.75 0 0 1-1.5 0V9a.75.75 0 0 1 .75-.75Zm0 8.25a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z"
-              clip-rule="evenodd"
-            />
-          </svg>
-          <p class="text-xs text-red-400 mt-2"><%= errors.title.msg %></p>
-          <% } %>
-        </div>
-        <div class="relative">
-          <textarea
-            type="text"
-            name="body"
-            id="body"
-            class="<%= `form-field peer ${(locals.errors && errors.body) ? 'invalid' : ''}`%>"
-            placeholder=" "
-          ></textarea>
-          <label for="body" class="form-label">Body</label>
-          <% if (locals.errors && errors.body) { %>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-            fill="currentColor"
-            class="size-6 text-red-400 absolute top-4 inset-x-[90%]"
-          >
-            <path
-              fill-rule="evenodd"
-              d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12ZM12 8.25a.75.75 0 0 1 .75.75v3.75a.75.75 0 0 1-1.5 0V9a.75.75 0 0 1 .75-.75Zm0 8.25a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z"
-              clip-rule="evenodd"
-            />
-          </svg>
-          <p class="text-xs text-red-400 mt-2"><%= errors.body.msg %></p>
-          <% } %>
-        </div>
-        <div class="justify-self-end flex items-center gap-2">
-            <a href="/" class="btn btn-secondary">Cancel</a>
-            <button type="submit" class="btn btn-primary">Post</button>
-        </div>
-      </form>
-</body>
+        </svg>
+        <p class="text-xs text-red-400 mt-2"><%= errors.title.msg %></p>
+        <% } %>
+      </div>
+      <div class="relative">
+        <textarea
+          type="text"
+          name="body"
+          id="body"
+          class="<%= `form-field peer ${(locals.errors && errors.body) ? 'invalid' : ''}`%>"
+          placeholder=" "
+        ></textarea>
+        <label for="body" class="form-label">Body</label>
+        <% if (locals.errors && errors.body) { %>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          class="size-6 text-red-400 absolute top-4 inset-x-[90%]"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12ZM12 8.25a.75.75 0 0 1 .75.75v3.75a.75.75 0 0 1-1.5 0V9a.75.75 0 0 1 .75-.75Zm0 8.25a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z"
+            clip-rule="evenodd"
+          />
+        </svg>
+        <p class="text-xs text-red-400 mt-2"><%= errors.body.msg %></p>
+        <% } %>
+      </div>
+      <div class="justify-self-end flex items-center gap-2">
+        <a href="/" class="btn btn-secondary">Cancel</a>
+        <button type="submit" class="btn btn-primary">Post</button>
+      </div>
+    </form>
+  </body>
 </html>

@@ -31,6 +31,20 @@ class UserDatabase extends Database<User> {
     );
     return rows[0];
   }
+
+  async becomeMember(id: number): Promise<void> {
+    await pool.query(
+      `UPDATE ${this.tableName} SET is_member = true WHERE id = $1`,
+      [id]
+    );
+  }
+
+  async becomeAdmin(id: number): Promise<void> {
+    await pool.query(
+      `UPDATE ${this.tableName} SET is_admin = true WHERE id = $1`,
+      [id]
+    );
+  }
 }
 
 export default new UserDatabase();

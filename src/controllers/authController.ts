@@ -144,3 +144,25 @@ export function logoutGet(req: Request, res: Response, next: NextFunction) {
     res.redirect('/log-in');
   });
 }
+
+export function verifyMember(req: Request, res: Response, next: NextFunction) {
+  if (req.body.password == process.env.MEMBER_PASSWORD) {
+    UserDatabase.becomeMember((req.user as User)?.id)
+      .then(() => {
+        return res.redirect('/');
+      })
+      .catch(next);
+  }
+  return res.redirect('/');
+}
+
+export function verifyAdmin(req: Request, res: Response, next: NextFunction) {
+  if (req.body.password == process.env.ADMIN_PASSWORD) {
+    UserDatabase.becomeAdmin((req.user as User)?.id)
+      .then(() => {
+        return res.redirect('/');
+      })
+      .catch(next);
+  }
+  return res.redirect('/');
+}
