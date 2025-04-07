@@ -152,8 +152,9 @@ export function verifyMember(req: Request, res: Response, next: NextFunction) {
         return res.redirect('/');
       })
       .catch(next);
+  } else {
+    return res.redirect('/');
   }
-  return res.redirect('/');
 }
 
 export function verifyAdmin(req: Request, res: Response, next: NextFunction) {
@@ -163,6 +164,7 @@ export function verifyAdmin(req: Request, res: Response, next: NextFunction) {
         return res.redirect('/');
       })
       .catch(next);
+  } else {
+    return res.redirect('/');
   }
-  return res.redirect('/');
 }

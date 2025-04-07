@@ -24,7 +24,7 @@ class MessageDatabase extends Database<Message> {
 
   async getAllMessages(): Promise<Message[]> {
     const { rows } = await pool.query(
-      `SELECT *
+      `SELECT m.id, m.title, m.created_at, m.body_text, u.first_name, u.last_name, u.email, u.is_member, u.is_admin
            FROM ${this.tableName} m 
            JOIN users u
            ON m.author_id = u.id`

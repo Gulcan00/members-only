@@ -5,6 +5,8 @@ import { User } from '../db/models';
 
 export async function getMessages(req: Request, res: Response) {
   const messages = await MessageDatabase.getAllMessages();
+  console.log(req.user);
+  
   res.render('index', { messages });
 }
 
@@ -17,12 +19,12 @@ export const createMessagePost = [
     .trim()
     .isAlphanumeric('en-US', { ignore: ' ' })
     .withMessage('Title must only contain letters and numbers'),
-  body('body').optional().trim().isEmpty().withMessage('Body cannot be empty'),
+  body('body').trim().notEmpty().withMessage('Body cannot be empty').optional({values: 'falsy'}),
   (req: Request, res: Response, next: NextFunction) => {
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-      res.render('message-form', { errors: errors.mapped() });
+      return res.render('message-form', { errors: errors.mapped() });
     }
 
     const { title, body } = req.body;
@@ -36,6 +38,8 @@ export const createMessagePost = [
 export function deleteMessage(req: Request, res: Response, next: NextFunction) {
   const id = Number.parseInt(req.params.id);
   MessageDatabase.deleteById(id)
-    .then(() => res.redirect('/'))
+    .then(() => {
+      return res.redirect('/');
+    })
     .catch((err) => next(err));
 }
