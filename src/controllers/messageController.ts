@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { body, validationResult } from 'express-validator';
-import MessageDatabase from '../db/entities/MessageDatabase';
-import { User } from '../db/models';
+import MessageDatabase from '../db/entities/MessageDatabase.js';
+import { User } from '../db/models.js';
 
 export async function getMessages(req: Request, res: Response) {
   const messages = await MessageDatabase.getAllMessages();

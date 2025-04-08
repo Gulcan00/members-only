@@ -1,6 +1,6 @@
-import pool from '../pool';
-import { Database } from './Database';
-import { Message } from '../models';
+import pool from '../pool.js';
+import { Database } from './Database.js';
+import { Message } from '../models.js';
 
 class MessageDatabase extends Database<Message> {
   constructor() {

@@ -3,8 +3,8 @@ import bcrypt from 'bcryptjs';
 import { body, validationResult } from 'express-validator';
 import passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
-import UserDatabase from '../db/entities/UserDatabase';
-import { User } from '../db/models';
+import UserDatabase from '../db/entities/UserDatabase.js';
+import { User } from '../db/models.js';
 
 passport.use(
   new LocalStrategy(

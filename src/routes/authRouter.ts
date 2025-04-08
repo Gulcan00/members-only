@@ -7,7 +7,7 @@ import {
   logoutGet,
   verifyMember,
   verifyAdmin,
-} from '../controllers/authController';
+} from '../controllers/authController.js';
 
 const authRouter = Router();
 

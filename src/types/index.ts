@@ -1,5 +1,5 @@
 import 'express-session';
-import { User } from '../db/models';
+import { User } from '../db/models.js';
 
 declare module 'express-session' {
 interface Session {

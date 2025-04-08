@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import moment from 'moment';
-import { User } from "../db/models";
+import { User } from "../db/models.js";
 
 
 export function isAuth(req: Request, res: Response, next: NextFunction) {

@@ -1,4 +1,4 @@
-import pool from '../pool';
+import pool from '../pool.js';
 
 export class Database<T> {
   tableName: string | undefined;

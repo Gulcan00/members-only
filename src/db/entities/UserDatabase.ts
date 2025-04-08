@@ -1,6 +1,6 @@
-import { Database } from './Database';
-import { User } from '../models';
-import pool from '../pool';
+import { Database } from './Database.js';
+import { User } from '../models.js';
+import pool from '../pool.js';
 
 class UserDatabase extends Database<User> {
   constructor() {

@@ -4,10 +4,10 @@ import path from 'path';
 import passport from 'passport';
 import session from 'express-session';
 import pgSession from 'connect-pg-simple';
-import pool from './db/pool';
-import authRouter from './routes/authRouter';
-import { isAuth, setCurrentUser, momentLib } from './middleware';
-import messageRouter from './routes/messageRouter';
+import pool from './db/pool.js';
+import authRouter from './routes/authRouter.js';
+import { isAuth, setCurrentUser, momentLib } from './middleware/index.js';
+import messageRouter from './routes/messageRouter.js';
 
 const pgSessionStore = pgSession(session);
 const __dirname = path.resolve();
